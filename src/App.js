@@ -1,20 +1,55 @@
-import './App.css';
-import React, {useState} from "react";
+import React, {Component} from "react";
+import Checkbox from "./CheckBox";
 
-const App = () => {
-    const [color, setColor] = useState("");
-    return (
-        <div align="center">
-            <div style={{backgroundColor: color, height: "100vh"}} className=" w-12">
+class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            total: 0
+        };
 
-                <input type="text"
-                       value={color}
-                       placeholder="Input Color Name"
-                       onChange={(e) => setColor(e.target.value)}/>
+        this.calculateTotal = this.calculateTotal.bind(this);
+    }
 
+    calculateTotal(input, checked) {
+        let {total} = this.state;
+
+        if (checked) {
+            total += input;
+        } else {
+            total -= input;
+        }
+
+        this.setState({
+            total
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100vh',
+                    backgroundColor: "#52595D",
+                }}>
+
+                    <Checkbox calculateTotal={this.calculateTotal}
+                              value={10}/>
+                    <Checkbox calculateTotal={this.calculateTotal}
+                              value={20}/>
+                    <Checkbox calculateTotal={this.calculateTotal}
+                              value={30}/>
+                    <Checkbox calculateTotal={this.calculateTotal}
+                              value={40}/>
+                    <p> <br/> <br/> <br/>   Total:  {this.state.total}</p>
+
+                </div>
             </div>
-        </div>
-    )
+        );
+    }
 }
 
 export default App;
