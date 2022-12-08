@@ -7,7 +7,6 @@ class App extends Component {
         this.state = {
             total: 0
         };
-
         this.calculateTotal = this.calculateTotal.bind(this);
     }
 
